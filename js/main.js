@@ -7,38 +7,39 @@ const btn = document.querySelector('.btn');
 
 let colorNow = 1;
 
-
-
-
-btn.addEventListener('click', () => {
-  
+btn.addEventListener('click', () =>  {
     changeColor()
     changeColorB()
-    setInterval(changeColorB, 2500, 500, 2000);
-    setInterval(changeColor, 2500, 500, 2000);
-})
+}, { once: true });
 
-const changeColor = () => {
-   
+
+
+
+
+
+
+function changeColor() {
+
     light[colorNow].className = 'light';
-   
+
     colorNow = colorNow + 1;
 
     const colorActive = () => {
         green.classList.toggle('_active');
         red.classList.toggle('_active');
         yellow.classList.toggle('_active');
+    };
+
+
+    if (colorNow > 2) {
+        colorNow = 0;
     }
-    
-    
-   if(colorNow > 2) {
-    colorNow = 0;
-   } 
-   
+
     const nowLight = light[colorNow];
-    console.log(nowLight)
-    nowLight.classList.add(nowLight.getAttribute('id'))
-    colorActive()
+    console.log(nowLight);
+    nowLight.classList.add(nowLight.getAttribute('id'));
+    setTimeout(changeColor, 2500, 500, 2000);
+    colorActive();
 
 }
  
@@ -74,5 +75,6 @@ const changeColorB = () => {
 
     nowLightB.classList.add(nowLightB.getAttribute('id'))
     colorActiveB();
+    setTimeout(changeColorB, 2500, 500, 2000);
 
 }
